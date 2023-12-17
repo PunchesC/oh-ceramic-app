@@ -13,25 +13,11 @@ body {
   line-height: 1.6;
   /* overflow: hidden; */
 }
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  /* height: 100vh; Remove this line */
-  scroll-snap-align: center;
-}
-
 .container {
   display: flex;
   flex-direction: column;
 }
 
-#service {
-  overflow: auto;
-}
 
 img {
   max-width: 100%;
@@ -110,23 +96,35 @@ section#contact {
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-gap: 30px;
-  margin:50px;
-  max-height: 100vh; /* Added to limit the height */
-  overflow-y: auto; /* Added to make it scrollable */
+  grid-template-rows: repeat(5, auto); /* Adjust this value based on the height of your images */
+  gap: 1rem;
+  padding: 1rem;
+  overflow: auto;
 }
 
-.image-gallery::-webkit-scrollbar {
-  display: none;
-}
 
-.image-gallery {
-  -ms-overflow-style: none;  /* Internet Explorer and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+/* Add styles for the images */
 .image-gallery img {
   width: 100%;
-  height: 100%;
+  max-width: 300px;
   object-fit: cover;
+}
+
+/* Add styles for the Load More button */
+button {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+.image-gallery::-webkit-scrollbar {
+  display: none;
 }
