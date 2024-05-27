@@ -1,0 +1,31 @@
+.inventory {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.inventory h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.inventory ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.inventory li {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.inventory p {
+  text-align: center;
+  color: #999;
+}
