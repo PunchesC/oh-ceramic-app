@@ -11,6 +11,9 @@ const HomeImage = () => {
   const [hasLoadedInitialImages, setHasLoadedInitialImages] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
   const [showButton, setShowButton] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isHoveredLeftChevron, setIsHoveredLeftChevron] = useState(false);
+  const [isHoveredRightChevron, setIsHoveredRightChevron] = useState(false);
 
 
   const fetchImages = async () => {
@@ -81,27 +84,48 @@ const HomeImage = () => {
 
   return (
     <div id="home">
-      <button onClick={handlePrev}>
-        <FaChevronLeft />
-      </button>
+      <div className="button-container left"
+        onMouseEnter={() => setIsHoveredLeftChevron(true)}
+        onMouseLeave={() => setIsHoveredLeftChevron(false)}
+      >
+        {isHoveredLeftChevron && (
 
-      <div id="home-image">
+          <FaChevronLeft class='chevron' onClick={handlePrev} />
 
-        {images.length > 0 && (
-          <img src={images[currentIndex]} alt="" />
         )}
-        <button id="play-pause-button" onClick={togglePlayPause}>
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-
       </div>
 
-      <button onClick={handleNext}>
-        <FaChevronRight />
-      </button>
+      <div id="home-image">
+        {images.length > 0 && (
+          <img src={images[currentIndex]}
+            alt=""
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          />
+        )}
+        {isHovered && (
+          <button id="play-pause-button"
+            onClick={togglePlayPause}
+            onMouseEnter={() => setIsHovered(true)}
+          >
+            {isPlaying ? '⏸' : '▶'}
+          </button>
+        )}
+      </div>
 
+      <div className="button-container right"
+        onMouseEnter={() => setIsHoveredRightChevron(true)}
+        onMouseLeave={() => setIsHoveredRightChevron(false)}
+      >
+        {isHoveredRightChevron && (
+
+          <FaChevronRight class='chevron' onClick={handleNext} />
+
+        )}
+      </div>
     </div>
   );
 };
+
 
 export default HomeImage;

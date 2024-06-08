@@ -1,12 +1,13 @@
-#home{
+#home {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
   width: 100%;
-  height: calc(100vh - 20px);
+  height: 100vh;
   scroll-snap-align: center;
 }
+
 #home-image {
   display: flex;
   flex-direction: column;
@@ -25,11 +26,44 @@
 
 #play-pause-button {
   bottom: 10px;
-  position:absolute;  
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0.5;
   background-color: transparent;
   color: white;
   font-size: 2em;
+}
+
+.button-container {
+  width: 100%;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Ensures absolute positioning works within this container */
+}
+
+.chevron {
+  
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+  display: none; /* Hide chevrons initially */
+}
+
+.button-container:hover .chevron {
+  display: block; /* Show chevrons on hover */
+}
+
+.button-container.left .chevron {
+  left: 10px; /* Position left chevron */
+}
+
+.button-container.right .chevron {
+  right: 10px; /* Position right chevron */
 }

@@ -71,6 +71,5 @@ const Inventory = () => {
       </section>
     </div>
   );
-};
-
+}
 export default Inventory;
