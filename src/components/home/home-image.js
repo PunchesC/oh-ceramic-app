@@ -90,7 +90,7 @@ const HomeImage = () => {
       >
         {isHoveredLeftChevron && (
 
-          <FaChevronLeft class='chevron' onClick={handlePrev} />
+          <FaChevronLeft className='chevron' onClick={handlePrev} />
 
         )}
       </div>
@@ -119,7 +119,7 @@ const HomeImage = () => {
       >
         {isHoveredRightChevron && (
 
-          <FaChevronRight class='chevron' onClick={handleNext} />
+          <FaChevronRight className='chevron' onClick={handleNext} />
 
         )}
       </div>
