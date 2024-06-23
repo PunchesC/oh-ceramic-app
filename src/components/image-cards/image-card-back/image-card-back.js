@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
-import './image-card-back.css';
+import React, { useEffect, useRef } from 'react';
 
-function ImageCardBack({ url, imageId, fetchDetails }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const flipCard = () => {
-    setIsFlipped(!isFlipped);
-  };
+const ImageCardBack = ({ url, imageName, onClose }) => {
+  const modalRef = useRef();
+  const overlayRef = useRef(); // Step 1: Add ref for the modal overlay
+
+  // Close modal if clicked on overlay
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (overlayRef.current === event.target && typeof onClose === 'function') {
+        onClose();
+      }
+    };
+  
+    const overlay = overlayRef.current;
+    if (overlay) { // Ensure overlay is not undefined
+      overlay.addEventListener('mousedown', handleClickOutside);
+      return () => overlay.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [onClose]);
+
   return (
-    <div 
-      className={`card ${isFlipped ? 'flipped' : ''}`} 
-      onClick={flipCard}
-      style={{ 
-        backgroundImage: `url(${url})`, 
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      <div className="image-container">
-        <div className="overlay-content">
-          <h2>Name</h2>
-          <p>Description</p>
-          <p>Price</p>
-          <button>Button 1</button>
-          <button>Button 2</button>
-        </div>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <img src={url} alt="Modal Content" />
+        <button className="close-button" onClick={onClose}>Close</button>
       </div>
     </div>
   );
-}
+};
+
 export default ImageCardBack;

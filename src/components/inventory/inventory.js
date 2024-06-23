@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { storage, ref, listAll, getDownloadURL } from '../../Firebase'; // adjust the path as needed
 import './inventory.css';
-import ImageCardFront from '../image-cards/image-card-front/image-card-front';
-import ImageCardBack from '../image-cards/image-card-back/image-card-back';
+import ImageCardBack from '../image-cards/image-card-back/image-card-back'; // adjust the path as needed
 
 const Inventory = () => {
   const [items, setItems] = useState([]);
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [flipState, setFlipState] = useState(new Array(images.length).fill(false));
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = useState('');
 
   const fetchImages = async () => {
     try {
@@ -17,18 +17,14 @@ const Inventory = () => {
       let urlPromises = result.items.map(itemRef => getDownloadURL(itemRef));
       let urls = await Promise.all(urlPromises);
       setImages(urls);
-      setFlipState(new Array(urls.length).fill(false));
     } catch (err) {
       console.error('Failed to fetch images:', err);
     }
   };
 
-  const flipCard = (index) => {
-    setFlipState(prevState => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
+  const openModal = (url) => {
+    setSelectedImageUrl(url);
+    setModalVisible(true);
   };
 
   useEffect(() => {
@@ -60,21 +56,19 @@ const Inventory = () => {
 
   return (
     <div>
-<section id="inventory">
-<h2>Inventory</h2>
-  <div className="image-gallery">
-  {images.map((url, index) => (
-  <div key={index} onClick={() => flipCard(index)}>
-    {flipState[index] ? (
-      <ImageCardBack url={url} imageName={'image name here'} />
-    ) : (
-      <ImageCardFront url={url} imageName={'image name here'} />
-    )}
-  </div>
-))}
-  </div>
-</section>
+      <section id="inventory">
+        <h2>Inventory</h2>
+        <div className="image-gallery">
+          {images.map((url, index) => (
+            <div key={index} onClick={() => openModal(url)}>
+              <img src={url} alt={`image ${index}`}/> {/* Example thumbnail */}
+            </div>
+          ))}
+        </div>
+      </section>
+      {modalVisible && <ImageCardBack url={selectedImageUrl} onClose={() => setModalVisible(false)} />}
     </div>
   );
-}
+};
+
 export default Inventory;
