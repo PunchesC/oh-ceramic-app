@@ -1,10 +1,9 @@
 // Import Firebase
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, list,listAll, getDownloadURL } from "firebase/storage";
-require('dotenv').config()
+import { getFirestore } from "firebase/firestore"; // Import getFirestore
+import { getStorage, ref, list, listAll, getDownloadURL } from "firebase/storage";
+require('dotenv').config();
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -15,9 +14,14 @@ const firebaseConfig = {
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID
 };
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Initialize Firestore
+const db = getFirestore(app);
+
+// Initialize Firebase Storage
 const storage = getStorage(app);
 
-export { storage, ref, list,listAll, getDownloadURL, app };
+export { storage, ref, list, listAll, getDownloadURL, app, db };

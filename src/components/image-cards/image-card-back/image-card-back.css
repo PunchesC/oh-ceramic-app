@@ -1,0 +1,47 @@
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 60%; /* Increased width */
+  max-width: 100%;
+  height: auto; /* Adjusted to auto */
+  max-height: 90vh; /* Adjusted to a percentage of the viewport height */
+  overflow-y: hidden; /* Allows scrolling within the modal if content exceeds its max-height */
+  color: black;
+}
+.modal-content img {
+  max-width: 100%;
+  max-height: 85vh; /* Increased max-height for taller images */
+  min-height: 60%; /* Increased min-height for larger initial size */
+  border-radius: 8px;
+  height: auto;
+  object-fit: contain;
+}
+.top-container {
+  display: flex;
+  justify-content: space-between; /* This will place some space between the img and section */
+  width: 100%; /* Use the full width of the modal-content */
+}
+
+.top-container .info-section {
+  width: 58%; /* Adjust based on the img width to fill the remaining space */
+  padding-left: 2%; /* Optional: Adds some space between the img and the text */
+}
+
+.close-button {
+  margin-top: 20px; /* Adds some space above the button */
+}
+
+.transaction-container{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.info-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
