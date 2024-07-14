@@ -12,7 +12,7 @@ const Inventory = () => {
 
   const fetchImages = async () => {
     try {
-      let imageRef = ref(storage, 'gs://olivia-hoffman-ceramics-8720e.appspot.com');
+      let imageRef = ref(storage, 'gs://olivia-hoffman-ceramics-8720e/ohceramics');
       let result = await listAll(imageRef);
       let urlPromises = result.items.map(itemRef => getDownloadURL(itemRef));
       let urls = await Promise.all(urlPromises);
@@ -33,6 +33,11 @@ const Inventory = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+        // Check if the response content type is JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new TypeError("Oops, we haven't got JSON!");
+        }
         return response.text();
       })
       .then(text => {
@@ -46,7 +51,7 @@ const Inventory = () => {
       })
       .catch(error => console.error('Error:', error))
       .finally(() => setIsLoading(false));
-
+  
     fetchImages();
   }, []);
 

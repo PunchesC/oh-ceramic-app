@@ -18,7 +18,7 @@ const HomeImage = () => {
 
   const fetchImages = async () => {
     try {
-      let imageRef = ref(storage, 'gs://olivia-hoffman-ceramics-8720e.appspot.com');
+      let imageRef = ref(storage, 'gs://olivia-hoffman-ceramics-8720e/ohceramics');
       let result = await listAll(imageRef);
       let urlPromises = result.items.map(itemRef => getDownloadURL(itemRef));
       let urls = await Promise.all(urlPromises);
